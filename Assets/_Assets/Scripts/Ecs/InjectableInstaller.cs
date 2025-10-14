@@ -15,11 +15,22 @@ namespace _Assets.Scripts.Ecs
         private void Start()
         {
             world = World.Default;
-            var systemsGroup = world.CreateSystemsGroup();
+
+            var updateGroup = world.CreateSystemsGroup();
+            
+            var pacmanInputSystem = new PacmanInputSystem();
+            _container.Inject(pacmanInputSystem);
+            updateGroup.AddSystem(pacmanInputSystem);
+
             var movementSystem = new PacmanMovementSystem();
             _container.Inject(movementSystem);
-            systemsGroup.AddSystem(movementSystem);
-            world.AddSystemsGroup(order: 0, systemsGroup);
+            updateGroup.AddSystem(movementSystem);
+
+            var pacmanInputCleanupSystem = new PacmanInputCleanupSystem();
+            _container.Inject(pacmanInputCleanupSystem);
+            updateGroup.AddSystem(pacmanInputCleanupSystem);
+
+            world.AddSystemsGroup(order: 0, updateGroup);
         }
     }
 }
