@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5878034337496339629}
   - component: {fileID: 7650850825869962931}
+  - component: {fileID: 5780770180546554401}
+  - component: {fileID: 6510511142543429886}
   - component: {fileID: 1146083382272915566}
   m_Layer: 0
   m_Name: MovementEntity
@@ -46,9 +48,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e95a215e474c50831ddfc2a320e564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Assets.Scripts.Ecs.Movement.Entities.MovementEntity
+--- !u!114 &5780770180546554401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213968122657148450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0a36bed909440a93a4be41bd251f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Assets.Scripts.Ecs.Movement.Providers.InputProvider
+--- !u!114 &6510511142543429886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213968122657148450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ec06aab015457180129931cf8ff5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Assets.Scripts.Ecs.Movement.Providers.MovementProvider
   serializedData:
     Position: {x: 0, y: 0, z: 0}
-    Transform: {fileID: 8872023386175143413}
+    Transform: {fileID: 5878034337496339629}
 --- !u!114 &1146083382272915566
 MonoBehaviour:
   m_ObjectHideFlags: 0

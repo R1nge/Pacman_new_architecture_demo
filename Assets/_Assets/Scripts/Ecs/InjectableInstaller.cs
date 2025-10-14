@@ -16,7 +16,7 @@ namespace _Assets.Scripts.Ecs
         {
             world = World.Default;
             var systemsGroup = world.CreateSystemsGroup();
-            var movementSystem = new MovementSystem();
+            var movementSystem = new PacmanMovementSystem();
             _container.Inject(movementSystem);
             systemsGroup.AddSystem(movementSystem);
             world.AddSystemsGroup(order: 0, systemsGroup);

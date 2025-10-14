@@ -1,5 +1,6 @@
 using _Assets.Scripts.Configs;
 using _Assets.Scripts.Ecs.Movement.Components;
+using _Assets.Scripts.Ecs.Tags;
 using _Assets.Scripts.Services.UIs;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
@@ -12,18 +13,20 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public class MovementSystem : ISystem
+    public class PacmanMovementSystem : ISystem
     {
         [Inject] private ConfigProvider _configProvider;
         [Inject] private MoveModel _moveModel;
         private Filter _filter;
         private Stash<MovementComponent> _movementStash;
+        private Stash<InputComponent> _inputStash;
         public World World { get; set; }
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<MovementComponent>().Build();
+            _filter = World.Filter.With<PacManTag>().With<InputComponent>().With<MovementComponent>().Build();
             _movementStash = World.GetStash<MovementComponent>();
+            _inputStash = World.GetStash<InputComponent>();
         }
 
 
@@ -33,7 +36,8 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
             {
                 ref var moveComponent = ref _movementStash.Get(entity);
                 Debug.Log($"Position: {moveComponent.Position}; Speed: {_configProvider.Speed}");
-                moveComponent.Position += Vector3.right * _configProvider.Speed;
+                ref var inputComponent = ref _inputStash.Get(entity);
+                moveComponent.Position += inputComponent.Direction * _configProvider.Speed * deltaTime;
                 moveComponent.Transform.position = moveComponent.Position;
                 _moveModel.Position.Value = moveComponent.Position;
             }
