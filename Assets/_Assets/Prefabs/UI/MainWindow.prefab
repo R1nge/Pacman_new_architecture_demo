@@ -263,7 +263,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8335151913570239623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7db4c5bf08442e4b3ef72f57fbd187d, type: 3}
+  m_Script: {fileID: 11500000, guid: c9694c414248f6c8c97a33dabc8cd8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Assets.Scripts.Services.UIs.MainWindowPresenter
   windowView: {fileID: 6234551669020793782}
@@ -277,14 +277,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8335151913570239623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f759cdbe4dd42a78365e202fc092f80, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbcdcf19a2237fec977c4fde2736ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Assets.Scripts.Services.UIs.MainWindowView
   canvas: {fileID: 6514950838263809843}
   canvasGroup: {fileID: 6206730513969240019}
   loadingAnimation: {fileID: 8341353942088088426}
   fadeDuration: 1
-  text: {fileID: 0}
   positionText: {fileID: 3525374731690470377}
 --- !u!114 &8341353942088088426
 MonoBehaviour:
