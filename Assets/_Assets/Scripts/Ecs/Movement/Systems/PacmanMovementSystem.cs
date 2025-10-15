@@ -17,7 +17,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
     public class PacmanMovementSystem : ISystem
     {
         [Inject] private ConfigProvider _configProvider;
-        [Inject] private PacmanMoveModel pacmanMoveModel;
+        [Inject] private PacmanMoveModel _pacmanMoveModel;
         [Inject] private GridModel _mapModel;
         private Filter _filter;
         private Stash<MovementComponent> _movementStash;
@@ -43,7 +43,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                 {
                     moveComponent.CurrentLerpDuration = 0;
                     moveComponent.CurrentPosition = moveComponent.TargetPosition;
-                    pacmanMoveModel.CurrentPosition.Value = moveComponent.CurrentPosition;
+                    _pacmanMoveModel.CurrentPosition.Value = moveComponent.CurrentPosition;
                     //if can move
                     if (_mapModel._cells[(int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)].cellType.CurrentValue != CellModel.CellType.Wall)
                     {
@@ -51,7 +51,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                         //In the original pacman didn't change the position and just continued on.
                         //So, need to move this check into input system
                         moveComponent.TargetPosition += inputComponent.Direction;
-                        pacmanMoveModel.TargetPosition.Value = moveComponent.TargetPosition;
+                        _pacmanMoveModel.TargetPosition.Value = moveComponent.TargetPosition;
                     }
                 }
                 else
@@ -59,7 +59,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     moveComponent.CurrentPosition = math.lerp(moveComponent.CurrentPosition,
                         moveComponent.TargetPosition, moveComponent.CurrentLerpDuration / moveComponent.LerpDuration);
                     moveComponent.Transform.position = moveComponent.CurrentPosition;
-                    pacmanMoveModel.CurrentPosition.Value = moveComponent.CurrentPosition;
+                    _pacmanMoveModel.CurrentPosition.Value = moveComponent.CurrentPosition;
                     moveComponent.CurrentLerpDuration += deltaTime;
                 }
             }

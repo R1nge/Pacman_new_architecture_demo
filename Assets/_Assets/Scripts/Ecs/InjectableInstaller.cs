@@ -22,6 +22,10 @@ namespace _Assets.Scripts.Ecs
             _container.Inject(pacmanInputSystem);
             updateGroup.AddSystem(pacmanInputSystem);
 
+            var pacmanScoreSystem = new PacmanFieldScoreSystem();
+            _container.Inject(pacmanScoreSystem);
+            updateGroup.AddSystem(pacmanScoreSystem);
+
             var movementSystem = new PacmanMovementSystem();
             _container.Inject(movementSystem);
             updateGroup.AddSystem(movementSystem);
