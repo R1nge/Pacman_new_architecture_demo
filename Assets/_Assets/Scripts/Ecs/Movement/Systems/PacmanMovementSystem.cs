@@ -38,24 +38,27 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                 ref var moveComponent = ref _movementStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
 
-                if (!_mapModel._cells[(int)(moveComponent.CurrentPosition.x + inputComponent.Direction.x),
-                        (int)(moveComponent.CurrentPosition.y + inputComponent.Direction.y)].IsWall)
+                if (moveComponent.CurrentLerpDuration > moveComponent.LerpDuration)
                 {
-                    if (moveComponent.CurrentLerpDuration > moveComponent.LerpDuration)
+                    moveComponent.CurrentLerpDuration = 0;
+                    moveComponent.CurrentPosition = moveComponent.TargetPosition;
+                    _moveModel.Position.Value = moveComponent.CurrentPosition;
+                    //if can move
+                    if (!_mapModel._cells[(int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)].IsWall)
                     {
-                        moveComponent.CurrentLerpDuration = 0;
                         moveComponent.TargetPosition += inputComponent.Direction;
                     }
-                    else
-                    {
-                        moveComponent.CurrentPosition = math.lerp(moveComponent.CurrentPosition, moveComponent.TargetPosition, moveComponent.CurrentLerpDuration / moveComponent.LerpDuration);
-                        moveComponent.Transform.position = moveComponent.CurrentPosition;
-                        _moveModel.Position.Value = moveComponent.CurrentPosition;
-                        moveComponent.CurrentLerpDuration += deltaTime;
-                    }
+                }
+                else
+                {
+                    moveComponent.CurrentPosition = math.lerp(moveComponent.CurrentPosition, moveComponent.TargetPosition, moveComponent.CurrentLerpDuration / moveComponent.LerpDuration);
+                    moveComponent.Transform.position = moveComponent.CurrentPosition;
+                    _moveModel.Position.Value = moveComponent.CurrentPosition;
+                    moveComponent.CurrentLerpDuration += deltaTime;
                 }
             }
         }
+
 
         public void Dispose()
         {
