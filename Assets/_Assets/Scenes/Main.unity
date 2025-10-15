@@ -461,11 +461,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
       propertyPath: serializedData.LerpDuration
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
+      propertyPath: serializedData.TargetPosition.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
       propertyPath: serializedData.TargetPosition.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
+      propertyPath: serializedData.CurrentPosition.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
       propertyPath: serializedData.CurrentPosition.y

@@ -40,7 +40,7 @@ namespace _Assets.Scripts.Services.Models
                 _cells[_width - 1, y] = new CellModel(true);
             }
 
-            //GenerateMazePaths();
+            GenerateMazePaths();
             DisplayMaze();
         }
 

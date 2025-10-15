@@ -47,6 +47,9 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     //if can move
                     if (!_mapModel._cells[(int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)].IsWall)
                     {
+                        //TODO:
+                        //In the original pacman didn't change the position and just continued on.
+                        //So, need to move this check into input system
                         moveComponent.TargetPosition += inputComponent.Direction;
                         pacmanMoveModel.TargetPosition.Value = moveComponent.TargetPosition;
                     }
