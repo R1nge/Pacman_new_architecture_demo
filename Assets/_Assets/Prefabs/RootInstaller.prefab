@@ -63,4 +63,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiConfig: {fileID: 11400000, guid: c01c0ec4a5855f641b051cf97763b193, type: 2}
-  Speed: 2
+  wall: {fileID: 1884560522626121491, guid: e455c9cb0c27d2f3b8fd3afcc36475cc, type: 3}

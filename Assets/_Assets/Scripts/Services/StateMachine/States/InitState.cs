@@ -19,7 +19,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
         {
             await _windowManager.Open(WindowType.Loading);
             await UniTask.Delay(1000);
-            await _windowManager.SwitchFromCurrentWindowTo(WindowType.Main);
+            await _stateMachine.SwitchState(GameStateType.Game);
+
         }
 
         public async UniTaskVoid Update()

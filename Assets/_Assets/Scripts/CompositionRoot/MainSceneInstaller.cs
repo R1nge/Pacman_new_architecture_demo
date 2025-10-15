@@ -1,3 +1,4 @@
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.StateMachine.StatesCreators;
 using _Assets.Scripts.Services.UIs;
@@ -12,6 +13,8 @@ namespace _Assets.Scripts.CompositionRoot
         {
             builder.Register<WindowFactory>(Lifetime.Singleton);
             builder.RegisterEntryPoint<WindowManager>().AsSelf();
+
+            builder.Register<WallSpawner>(Lifetime.Singleton);
 
             builder.Register<MainMenuStatesFactory>(Lifetime.Singleton);
             builder.Register<MainSceneStateCreator>(Lifetime.Singleton);

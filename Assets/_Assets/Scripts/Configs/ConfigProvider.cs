@@ -7,7 +7,7 @@ namespace _Assets.Scripts.Configs
         [SerializeField] private UIConfig uiConfig;
         public UIConfig UIConfig => uiConfig;
 
-        //Example
-        public float Speed = 2;
+        [SerializeField] private GameObject wall;
+        public GameObject Wall => wall;
     }
 }
