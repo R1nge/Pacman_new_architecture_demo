@@ -19,6 +19,15 @@ namespace _Assets.Scripts.Services.UIs
 
         private void InitializeMaze()
         {
+            for (int y = 0; y < _height; y++)
+            {
+                for (int x = 0; x < _width; x++)
+                {
+                    _cells[x, y] = new CellModel(false);
+                }
+
+            }
+            
             for (int x = 0; x < _width; x++)
             {
                 _cells[x, 0] = new CellModel(true);
@@ -31,7 +40,7 @@ namespace _Assets.Scripts.Services.UIs
                 _cells[_width - 1, y] = new CellModel(true);
             }
 
-            GenerateMazePaths();
+            //GenerateMazePaths();
             DisplayMaze();
         }
 
@@ -50,7 +59,7 @@ namespace _Assets.Scripts.Services.UIs
                 }
             }
 
-            CreateSpecialPatterns();
+            //CreateSpecialPatterns();
         }
 
         private void CreateSpecialPatterns()

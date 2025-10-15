@@ -39,10 +39,8 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                 Debug.Log($"Position: {moveComponent.Position}; Speed: {_configProvider.Speed}");
                 ref var inputComponent = ref _inputStash.Get(entity);
 
-                Debug.Log(
-                    $"Move rounded; X:{(int)math.round(moveComponent.Position.x + inputComponent.Direction.x)},{(int)math.round(moveComponent.Position.y + inputComponent.Direction.y)} Is wall: {_mapModel._cells[(int)math.round(moveComponent.Position.x), (int)math.round(moveComponent.Position.y)].IsWall}");
-                if (!_mapModel._cells[(int)math.round(moveComponent.Position.x),
-                        (int)math.round(moveComponent.Position.y)].IsWall)
+                Debug.Log($"Move rounded; X:{(int)(moveComponent.Position.x + inputComponent.Direction.x)},{(int)(moveComponent.Position.y + inputComponent.Direction.y)} Is wall: {_mapModel._cells[(int)math.round(moveComponent.Position.x), (int)math.round(moveComponent.Position.y)].IsWall}");
+                if (!_mapModel._cells[(int)(moveComponent.Position.x + inputComponent.Direction.x), (int)(moveComponent.Position.y + inputComponent.Direction.y)].IsWall)
                 {
                     moveComponent.Position += inputComponent.Direction; //* _configProvider.Speed * deltaTime;
                     moveComponent.Transform.position = moveComponent.Position;
