@@ -24,7 +24,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTaskVoid Update()
         {
-            Debug.Log("Updates");
+            //Debug.Log("Updates");
         }
 
         public async UniTaskVoid FixedUpdate()

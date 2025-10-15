@@ -26,9 +26,9 @@ namespace _Assets.Scripts.Ecs
             _container.Inject(movementSystem);
             updateGroup.AddSystem(movementSystem);
 
-            var pacmanInputCleanupSystem = new PacmanInputCleanupSystem();
-            _container.Inject(pacmanInputCleanupSystem);
-            updateGroup.AddSystem(pacmanInputCleanupSystem);
+            //var pacmanInputCleanupSystem = new PacmanInputCleanupSystem();
+            //_container.Inject(pacmanInputCleanupSystem);
+            //updateGroup.AddSystem(pacmanInputCleanupSystem);
 
             world.AddSystemsGroup(order: 0, updateGroup);
         }

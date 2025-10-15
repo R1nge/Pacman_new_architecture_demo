@@ -322,7 +322,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 60
+  field of view: 103.7
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -457,6 +457,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
       propertyPath: serializedData.Position.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
+      propertyPath: serializedData.LerpDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
+      propertyPath: serializedData.TargetPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
+      propertyPath: serializedData.CurrentPosition.y
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7650850825869962931, guid: 99e3250feff285132b04647788d412a5, type: 3}

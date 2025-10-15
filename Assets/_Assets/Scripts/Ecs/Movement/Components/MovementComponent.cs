@@ -10,7 +10,10 @@ namespace _Assets.Scripts.Ecs.Movement.Components
     [System.Serializable]
     public struct MovementComponent : IComponent
     {
-        public Vector3 Position;
+        public Vector3 CurrentPosition;
+        public Vector3 TargetPosition;
+        public float CurrentLerpDuration;
+        public float LerpDuration;
         public Transform Transform;
     }
 }

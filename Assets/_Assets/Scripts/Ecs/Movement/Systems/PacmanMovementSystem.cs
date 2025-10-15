@@ -36,15 +36,23 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
             foreach (var entity in _filter)
             {
                 ref var moveComponent = ref _movementStash.Get(entity);
-                Debug.Log($"Position: {moveComponent.Position}; Speed: {_configProvider.Speed}");
                 ref var inputComponent = ref _inputStash.Get(entity);
 
-                Debug.Log($"Move rounded; X:{(int)(moveComponent.Position.x + inputComponent.Direction.x)},{(int)(moveComponent.Position.y + inputComponent.Direction.y)} Is wall: {_mapModel._cells[(int)math.round(moveComponent.Position.x), (int)math.round(moveComponent.Position.y)].IsWall}");
-                if (!_mapModel._cells[(int)(moveComponent.Position.x + inputComponent.Direction.x), (int)(moveComponent.Position.y + inputComponent.Direction.y)].IsWall)
+                if (!_mapModel._cells[(int)(moveComponent.CurrentPosition.x + inputComponent.Direction.x),
+                        (int)(moveComponent.CurrentPosition.y + inputComponent.Direction.y)].IsWall)
                 {
-                    moveComponent.Position += inputComponent.Direction; //* _configProvider.Speed * deltaTime;
-                    moveComponent.Transform.position = moveComponent.Position;
-                    _moveModel.Position.Value = moveComponent.Position;
+                    if (moveComponent.CurrentLerpDuration > moveComponent.LerpDuration)
+                    {
+                        moveComponent.CurrentLerpDuration = 0;
+                        moveComponent.TargetPosition += inputComponent.Direction;
+                    }
+                    else
+                    {
+                        moveComponent.CurrentPosition = math.lerp(moveComponent.CurrentPosition, moveComponent.TargetPosition, moveComponent.CurrentLerpDuration / moveComponent.LerpDuration);
+                        moveComponent.Transform.position = moveComponent.CurrentPosition;
+                        _moveModel.Position.Value = moveComponent.CurrentPosition;
+                        moveComponent.CurrentLerpDuration += deltaTime;
+                    }
                 }
             }
         }
