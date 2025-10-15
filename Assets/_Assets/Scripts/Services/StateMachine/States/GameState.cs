@@ -11,13 +11,16 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly WallSpawner _wallSpawner;
         private readonly GridModel _map;
         private readonly WindowManager _windowManager;
+        private readonly BallSpawner _ballSpawner;
 
-        public GameState(GameStateMachine stateMachine, WallSpawner wallSpawner, GridModel map, WindowManager windowManager)
+        public GameState(GameStateMachine stateMachine, WallSpawner wallSpawner, GridModel map,
+            WindowManager windowManager, BallSpawner ballSpawner)
         {
             _stateMachine = stateMachine;
             _wallSpawner = wallSpawner;
             _map = map;
             _windowManager = windowManager;
+            _ballSpawner = ballSpawner;
         }
 
         public async UniTask Enter()
@@ -27,9 +30,13 @@ namespace _Assets.Scripts.Services.StateMachine.States
             {
                 for (int x = 0; x < _map._width; x++)
                 {
-                    if (_map._cells[x, y].IsWall)
+                    if (_map._cells[x, y].cellType == CellModel.CellType.Wall)
                     {
                         _wallSpawner.Create(new Vector3(x, y, 0));
+                    }
+                    else if (_map._cells[x, y].cellType == CellModel.CellType.Point)
+                    {
+                        _ballSpawner.Create(new Vector3(x, y, 0));
                     }
                 }
             }

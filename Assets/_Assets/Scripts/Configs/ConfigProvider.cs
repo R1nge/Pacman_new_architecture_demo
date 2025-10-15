@@ -9,5 +9,7 @@ namespace _Assets.Scripts.Configs
 
         [SerializeField] private GameObject wall;
         public GameObject Wall => wall;
+        [SerializeField] private GameObject point;
+        public GameObject Point => point;
     }
 }

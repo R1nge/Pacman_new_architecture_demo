@@ -23,21 +23,21 @@ namespace _Assets.Scripts.Services.Models
             {
                 for (int x = 0; x < _width; x++)
                 {
-                    _cells[x, y] = new CellModel(false);
+                    _cells[x, y] = new CellModel(CellModel.CellType.Point);
                 }
 
             }
             
             for (int x = 0; x < _width; x++)
             {
-                _cells[x, 0] = new CellModel(true);
-                _cells[x, _height - 1] = new CellModel(true);
+                _cells[x, 0] = new CellModel(CellModel.CellType.Wall);
+                _cells[x, _height - 1] = new CellModel(CellModel.CellType.Wall);
             }
 
             for (int y = 0; y < _height; y++)
             {
-                _cells[0, y] = new CellModel(true);
-                _cells[_width - 1, y] = new CellModel(true);
+                _cells[0, y] = new CellModel(CellModel.CellType.Wall);
+                _cells[_width - 1, y] = new CellModel(CellModel.CellType.Wall);
             }
 
             GenerateMazePaths();
@@ -53,20 +53,11 @@ namespace _Assets.Scripts.Services.Models
                 for (int x = 1; x < _width - 1; x++)
                 {
                     if ((x % 2 == 0) && (y % 2 == 0))
-                        _cells[x, y] = new CellModel(true); // Wall
+                        _cells[x, y] = new CellModel(CellModel.CellType.Wall); // Wall
                     else
-                        _cells[x, y] = new CellModel(false); // Path
+                        _cells[x, y] = new CellModel(CellModel.CellType.Point); // Path
                 }
             }
-
-            //CreateSpecialPatterns();
-        }
-
-        private void CreateSpecialPatterns()
-        {
-            _cells[1, 3] = new CellModel(false);
-            _cells[1, 4] = new CellModel(false);
-            _cells[3, 1] = new CellModel(false);
         }
 
         private void DisplayMaze()
@@ -76,7 +67,7 @@ namespace _Assets.Scripts.Services.Models
                 string line = "";
                 for (int x = 0; x < _width; x++)
                 {
-                    line += _cells[x, y].IsWall ? "#" : " ";
+                    line += _cells[x, y].cellType == CellModel.CellType.Wall ? "#" : " ";
                 }
 
                 Debug.Log(line);
@@ -86,11 +77,18 @@ namespace _Assets.Scripts.Services.Models
 
     public class CellModel
     {
-        public bool IsWall { get; private set; }
+        public CellType cellType { get; private set; }
 
-        public CellModel(bool isWall)
+        public CellModel(CellType cellType)
         {
-            IsWall = isWall;
+            this.cellType = cellType;
+        }
+        
+        public enum CellType : byte
+        {
+            None = 0,
+            Wall = 1,
+            Point = 2
         }
     }
 }

@@ -45,7 +45,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     moveComponent.CurrentPosition = moveComponent.TargetPosition;
                     pacmanMoveModel.CurrentPosition.Value = moveComponent.CurrentPosition;
                     //if can move
-                    if (!_mapModel._cells[(int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)].IsWall)
+                    if (_mapModel._cells[(int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)].cellType != CellModel.CellType.Wall)
                     {
                         //TODO:
                         //In the original pacman didn't change the position and just continued on.
@@ -56,7 +56,8 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                 }
                 else
                 {
-                    moveComponent.CurrentPosition = math.lerp(moveComponent.CurrentPosition, moveComponent.TargetPosition, moveComponent.CurrentLerpDuration / moveComponent.LerpDuration);
+                    moveComponent.CurrentPosition = math.lerp(moveComponent.CurrentPosition,
+                        moveComponent.TargetPosition, moveComponent.CurrentLerpDuration / moveComponent.LerpDuration);
                     moveComponent.Transform.position = moveComponent.CurrentPosition;
                     pacmanMoveModel.CurrentPosition.Value = moveComponent.CurrentPosition;
                     moveComponent.CurrentLerpDuration += deltaTime;

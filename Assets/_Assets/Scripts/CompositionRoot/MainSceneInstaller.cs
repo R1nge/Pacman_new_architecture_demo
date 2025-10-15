@@ -15,6 +15,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterEntryPoint<WindowManager>().AsSelf();
 
             builder.Register<WallSpawner>(Lifetime.Singleton);
+            builder.Register<BallSpawner>(Lifetime.Singleton);
 
             builder.Register<MainMenuStatesFactory>(Lifetime.Singleton);
             builder.Register<MainSceneStateCreator>(Lifetime.Singleton);
