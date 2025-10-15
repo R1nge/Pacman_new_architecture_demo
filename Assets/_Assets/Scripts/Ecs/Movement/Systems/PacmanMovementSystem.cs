@@ -45,7 +45,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     moveComponent.CurrentPosition = moveComponent.TargetPosition;
                     pacmanMoveModel.CurrentPosition.Value = moveComponent.CurrentPosition;
                     //if can move
-                    if (_mapModel._cells[(int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)].cellType != CellModel.CellType.Wall)
+                    if (_mapModel._cells[(int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)].cellType.CurrentValue != CellModel.CellType.Wall)
                     {
                         //TODO:
                         //In the original pacman didn't change the position and just continued on.

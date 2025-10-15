@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using R3;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services.Models
@@ -67,7 +68,7 @@ namespace _Assets.Scripts.Services.Models
                 string line = "";
                 for (int x = 0; x < _width; x++)
                 {
-                    line += _cells[x, y].cellType == CellModel.CellType.Wall ? "#" : " ";
+                    line += _cells[x, y].cellType.CurrentValue == CellModel.CellType.Wall ? "#" : " ";
                 }
 
                 Debug.Log(line);
@@ -77,11 +78,11 @@ namespace _Assets.Scripts.Services.Models
 
     public class CellModel
     {
-        public CellType cellType { get; private set; }
+        public ReactiveProperty<CellType> cellType { get; private set; }
 
         public CellModel(CellType cellType)
         {
-            this.cellType = cellType;
+            this.cellType = new(cellType);
         }
         
         public enum CellType : byte

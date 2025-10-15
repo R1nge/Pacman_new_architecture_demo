@@ -30,11 +30,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
             {
                 for (int x = 0; x < _map._width; x++)
                 {
-                    if (_map._cells[x, y].cellType == CellModel.CellType.Wall)
+                    if (_map._cells[x, y].cellType.CurrentValue == CellModel.CellType.Wall)
                     {
                         _wallSpawner.Create(new Vector3(x, y, 0));
                     }
-                    else if (_map._cells[x, y].cellType == CellModel.CellType.Point)
+                    else if (_map._cells[x, y].cellType.CurrentValue == CellModel.CellType.Point)
                     {
                         _ballSpawner.Create(new Vector3(x, y, 0));
                     }
