@@ -13,6 +13,8 @@ namespace _Assets.Scripts.CompositionRoot
 
         protected override void Configure(IContainerBuilder builder)
         {
+            var map = new GridModel(31, 28);
+            builder.RegisterInstance<GridModel>(map);
             builder.Register<MoveModel>(Lifetime.Singleton);
             builder.RegisterComponent(configProvider);
             builder.Register<SceneSerivce>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
