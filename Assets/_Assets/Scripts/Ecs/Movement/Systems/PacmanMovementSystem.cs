@@ -4,12 +4,12 @@ using _Assets.Scripts.Ecs.Tags;
 using _Assets.Scripts.Services.UIs;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 using VContainer;
 
 namespace _Assets.Scripts.Ecs.Movement.Systems
 {
-    
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
@@ -17,6 +17,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
     {
         [Inject] private ConfigProvider _configProvider;
         [Inject] private MoveModel _moveModel;
+        [Inject] private GridModel _mapModel;
         private Filter _filter;
         private Stash<MovementComponent> _movementStash;
         private Stash<InputComponent> _inputStash;
@@ -37,9 +38,16 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                 ref var moveComponent = ref _movementStash.Get(entity);
                 Debug.Log($"Position: {moveComponent.Position}; Speed: {_configProvider.Speed}");
                 ref var inputComponent = ref _inputStash.Get(entity);
-                moveComponent.Position += inputComponent.Direction * _configProvider.Speed * deltaTime;
-                moveComponent.Transform.position = moveComponent.Position;
-                _moveModel.Position.Value = moveComponent.Position;
+
+                Debug.Log(
+                    $"Move rounded; X:{(int)math.round(moveComponent.Position.x + inputComponent.Direction.x)},{(int)math.round(moveComponent.Position.y + inputComponent.Direction.y)} Is wall: {_mapModel._cells[(int)math.round(moveComponent.Position.x), (int)math.round(moveComponent.Position.y)].IsWall}");
+                if (!_mapModel._cells[(int)math.round(moveComponent.Position.x),
+                        (int)math.round(moveComponent.Position.y)].IsWall)
+                {
+                    moveComponent.Position += inputComponent.Direction; //* _configProvider.Speed * deltaTime;
+                    moveComponent.Transform.position = moveComponent.Position;
+                    _moveModel.Position.Value = moveComponent.Position;
+                }
             }
         }
 

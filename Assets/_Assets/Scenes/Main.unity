@@ -451,6 +451,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
+      propertyPath: serializedData.Position.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510511142543429886, guid: 99e3250feff285132b04647788d412a5, type: 3}
+      propertyPath: serializedData.Position.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7650850825869962931, guid: 99e3250feff285132b04647788d412a5, type: 3}
       propertyPath: serializedData.Transform
       value: 
