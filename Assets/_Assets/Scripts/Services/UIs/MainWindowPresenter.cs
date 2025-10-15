@@ -1,4 +1,5 @@
 using System;
+using _Assets.Scripts.Services.Models;
 using R3;
 using UnityEngine;
 using VContainer;
@@ -9,12 +10,12 @@ namespace _Assets.Scripts.Services.UIs
     {
         [SerializeField] private MainWindowView view;
         private CompositeDisposable _compositeDisposable;
-        [Inject] private MoveModel _moveModel;
+        [Inject] private PacmanMoveModel pacmanMoveModel;
 
         private void Awake()
         {
             _compositeDisposable = new CompositeDisposable();
-            _moveModel.Position.Subscribe(UpdateUI).AddTo(_compositeDisposable);
+            pacmanMoveModel.CurrentPosition.Subscribe(UpdateUI).AddTo(_compositeDisposable);
         }
 
         private void UpdateUI(Vector3 position)

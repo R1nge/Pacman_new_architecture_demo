@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Assets.Scripts.Services.UIs
+namespace _Assets.Scripts.Services.Models
 {
     public class GridModel
     {

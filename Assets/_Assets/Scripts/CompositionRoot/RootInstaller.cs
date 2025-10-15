@@ -1,4 +1,5 @@
 using _Assets.Scripts.Configs;
+using _Assets.Scripts.Services.Models;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace _Assets.Scripts.CompositionRoot
         {
             var map = new GridModel(31, 28);
             builder.RegisterInstance<GridModel>(map);
-            builder.Register<MoveModel>(Lifetime.Singleton);
+            builder.Register<PacmanMoveModel>(Lifetime.Singleton);
             builder.RegisterComponent(configProvider);
             builder.Register<SceneSerivce>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
