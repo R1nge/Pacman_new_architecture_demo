@@ -14,8 +14,11 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly BallSpawner _ballSpawner;
         private readonly MazeParser _mazeParser;
         private readonly InjectableInstaller _injectableInstaller;
+        private readonly WarpPortalSpawner _warpPortalSpawner;
 
-        private MainMenuStatesFactory(WindowManager windowManager, WallSpawner wallSpawner, GridModel map, BallSpawner ballSpawner, MazeParser mazeParser, InjectableInstaller injectableInstaller)
+        private MainMenuStatesFactory(WindowManager windowManager, WallSpawner wallSpawner, GridModel map,
+            BallSpawner ballSpawner, MazeParser mazeParser, InjectableInstaller injectableInstaller,
+            WarpPortalSpawner warpPortalSpawner)
         {
             _windowManager = windowManager;
             _wallSpawner = wallSpawner;
@@ -23,6 +26,7 @@ namespace _Assets.Scripts.Services.StateMachine
             _ballSpawner = ballSpawner;
             _mazeParser = mazeParser;
             _injectableInstaller = injectableInstaller;
+            _warpPortalSpawner = warpPortalSpawner;
         }
 
         public IAsyncState CreateAsyncState(GameStateType gameStateType, GameStateMachine gameStateMachine)
@@ -32,7 +36,8 @@ namespace _Assets.Scripts.Services.StateMachine
                 case GameStateType.Init:
                     return new InitState(gameStateMachine, _windowManager);
                 case GameStateType.Game:
-                    return new GameState(gameStateMachine, _wallSpawner, _map, _windowManager, _ballSpawner, _mazeParser, _injectableInstaller);
+                    return new GameState(gameStateMachine, _wallSpawner, _map, _windowManager, _ballSpawner,
+                        _mazeParser, _injectableInstaller, _warpPortalSpawner);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameStateType), gameStateType, null);
             }

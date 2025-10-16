@@ -9,7 +9,11 @@ namespace _Assets.Scripts.Configs
         public GameObject Wall => wall;
         [SerializeField] private GameObject point;
         public GameObject Point => point;
-        [SerializeField] private int width = 28, height = 27;
+        [SerializeField] private GameObject warpPortal;
+        public GameObject WarpPortal => warpPortal;
+
+        private const int width = 28;
+        private const int height = 27;
 
         public int Width => width;
 

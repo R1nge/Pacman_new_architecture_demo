@@ -20,12 +20,13 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<WindowFactory>(Lifetime.Singleton);
             builder.RegisterEntryPoint<WindowManager>().AsSelf();
 
-            builder.Register<MapService>(Lifetime.Singleton);
+            builder.Register<MazeService>(Lifetime.Singleton);
             builder.Register<PacmanService>(Lifetime.Singleton);
             builder.Register<ScoreService>(Lifetime.Singleton);
 
             builder.Register<WallSpawner>(Lifetime.Singleton);
             builder.Register<BallSpawner>(Lifetime.Singleton);
+            builder.Register<WarpPortalSpawner>(Lifetime.Singleton);
 
             builder.Register<MainMenuStatesFactory>(Lifetime.Singleton);
             builder.Register<MainSceneStateCreator>(Lifetime.Singleton);

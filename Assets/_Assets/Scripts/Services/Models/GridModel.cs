@@ -15,21 +15,6 @@ namespace _Assets.Scripts.Services.Models
             _width = maze.GetLength(0);
             _height = maze.GetLength(1);
             _cells = maze;
-            DisplayMaze();
-        }
-
-        private void DisplayMaze()
-        {
-            for (int y = 0; y < _height; y++)
-            {
-                string line = "";
-                for (int x = 0; x < _width; x++)
-                {
-                    line += _cells[x, y].cellType.CurrentValue == CellModel.CellType.Wall ? "#" : " ";
-                }
-
-                Debug.Log(line);
-            }
         }
     }
 
@@ -46,7 +31,8 @@ namespace _Assets.Scripts.Services.Models
         {
             None = 0,
             Wall = 1,
-            Point = 2
+            Point = 2,
+            Warp = 3
         }
     }
 }

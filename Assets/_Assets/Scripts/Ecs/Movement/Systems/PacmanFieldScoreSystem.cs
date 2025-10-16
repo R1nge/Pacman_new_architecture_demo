@@ -7,7 +7,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
 {
     public class PacmanFieldScoreSystem : ISystem
     {
-        [Inject] private MapService _mapService;
+        [Inject] private MazeService mazeService;
         [Inject] private PacmanService _pacmanService;
         [Inject] private ScoreService _scoreService;
         [Inject] private BallSpawner _ballSpawner;
@@ -21,9 +21,9 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
         {
             var positionX = (int)_pacmanService.GetPacmanPosition().x;
             var positionY = (int)_pacmanService.GetPacmanPosition().y;
-            if (_mapService.GetCellType(positionX, positionY) == CellModel.CellType.Point)
+            if (mazeService.GetCellType(positionX, positionY) == CellModel.CellType.Point)
             {
-                _mapService.SetCellType(positionX, positionY, CellModel.CellType.None);
+                mazeService.SetCellType(positionX, positionY, CellModel.CellType.None);
                 _scoreService.Add(1);
                 _ballSpawner.RemoveAt(_pacmanService.GetPacmanPosition());
             }

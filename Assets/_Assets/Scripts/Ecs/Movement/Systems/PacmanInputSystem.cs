@@ -15,7 +15,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class PacmanInputSystem : ISystem
     {
-        [Inject] private MapService _mapService;
+        [Inject] private MazeService mazeService;
         [Inject] private PacmanService _pacmanService;
         private Filter _filter;
         private Stash<InputComponent> _inputStash;
@@ -51,8 +51,8 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     _tempDirection = Vector3.right;
                 }
 
-                if (_mapService.GetCellType((int)(_pacmanService.GetPacmanPosition().x + _tempDirection.x), (int)(_pacmanService.GetPacmanPosition().y + _tempDirection.y)) != CellModel.CellType.Wall || 
-                    _mapService.GetCellType((int)(_pacmanService.GetPacmanTargetPosition().x + _tempDirection.x), (int)(_pacmanService.GetPacmanTargetPosition().y + _tempDirection.y)) != CellModel.CellType.Wall)
+                if (mazeService.GetCellType((int)(_pacmanService.GetPacmanPosition().x + _tempDirection.x), (int)(_pacmanService.GetPacmanPosition().y + _tempDirection.y)) != CellModel.CellType.Wall || 
+                    mazeService.GetCellType((int)(_pacmanService.GetPacmanTargetPosition().x + _tempDirection.x), (int)(_pacmanService.GetPacmanTargetPosition().y + _tempDirection.y)) != CellModel.CellType.Wall)
                 {
                     inputComponent.Direction = _tempDirection;
                 }

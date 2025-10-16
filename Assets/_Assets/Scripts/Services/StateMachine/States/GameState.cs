@@ -15,9 +15,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly BallSpawner _ballSpawner;
         private readonly MazeParser _mazeParser;
         private readonly InjectableInstaller _injectableInstaller;
+        private readonly WarpPortalSpawner _warpPortalSpawner;
 
         public GameState(GameStateMachine stateMachine, WallSpawner wallSpawner, GridModel map,
-            WindowManager windowManager, BallSpawner ballSpawner, MazeParser mazeParser, InjectableInstaller injectableInstaller)
+            WindowManager windowManager, BallSpawner ballSpawner, MazeParser mazeParser,
+            InjectableInstaller injectableInstaller, WarpPortalSpawner warpPortalSpawner)
         {
             _stateMachine = stateMachine;
             _wallSpawner = wallSpawner;
@@ -26,6 +28,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _ballSpawner = ballSpawner;
             _mazeParser = mazeParser;
             _injectableInstaller = injectableInstaller;
+            _warpPortalSpawner = warpPortalSpawner;
         }
 
         public async UniTask Enter()
@@ -46,6 +49,10 @@ namespace _Assets.Scripts.Services.StateMachine.States
                     else if (_map._cells[x, y].cellType.CurrentValue == CellModel.CellType.Point)
                     {
                         _ballSpawner.Create(new Vector3(x, y, 0));
+                    }
+                    else if (_map._cells[x, y].cellType.CurrentValue == CellModel.CellType.Warp)
+                    {
+                        _warpPortalSpawner.Create(new Vector3(x, y));
                     }
                 }
             }

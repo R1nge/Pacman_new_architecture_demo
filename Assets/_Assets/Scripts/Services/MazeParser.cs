@@ -44,22 +44,18 @@ namespace _Assets.Scripts.Services
                 if (character == '#')
                 {
                     cells[x, y].cellType.Value = CellModel.CellType.Wall;
-                    //Wall
                 }
                 else if (character == '.')
                 {
                     cells[x, y].cellType.Value = CellModel.CellType.Point;
-                    //Point/collectable
                 }
                 else if (character == '@')
                 {
-                    cells[x, y].cellType.Value = CellModel.CellType.None;
-                    //Tunnel
+                    cells[x, y].cellType.Value = CellModel.CellType.Warp;
                 }
                 else if (character == ' ')
                 {
                     cells[x, y].cellType.Value = CellModel.CellType.None;
-                    //Space
                 }
                 else
                 {
