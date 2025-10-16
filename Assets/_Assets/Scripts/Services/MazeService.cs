@@ -20,25 +20,45 @@ namespace _Assets.Scripts.Services
 
         public CellModel.CellType GetCellType(int x, int y)
         {
+            if (x >= _map._cells.GetLength(0))
+            {
+                x = _map._cells.GetLength(0) - 1;
+            }
+
+            if (y >= _map._cells.GetLength(1))
+            {
+                y = _map._cells.GetLength(1) - 1;
+            }
+
             return _map._cells[x, y].cellType.CurrentValue;
         }
 
         /// <summary>
-        /// Warps player to the opposite or next portal
+        /// Warps entity to the opposite or next portal
+        /// Supports only portals at the start and the end of the map
         /// </summary>
-        /// <param name="position">Pacman position</param>
-        /// <returns>Portal position or pacman position if failed</returns>
-        public Vector3 TryWarp(Vector3 position)
+        /// <param name="position">Entity position</param>
+        /// <returns>Portal position or current entity position if failed</returns>
+        public (bool, Vector3) TryWarp(Vector3 position)
         {
-            for (int x = 0; x < _map._cells.GetLength(0); x++)
+            if (_map._cells[(int)position.x, (int)position.y].cellType.CurrentValue == CellModel.CellType.Warp)
             {
-                if (_map._cells[x, (int)position.y].cellType.CurrentValue == CellModel.CellType.Warp && x != (int)position.x)
+                for (int x = 0; x < _map._cells.GetLength(0); x++)
                 {
-                    return new Vector3(x, position.y, 0);
+                    if (_map._cells[x, (int)position.y].cellType.CurrentValue == CellModel.CellType.Warp &&
+                        x != (int)position.x)
+                    {
+                        if (x == 0)
+                        {
+                            return (true, new Vector3(1, position.y, 0));
+                        }
+
+                        return (true, new Vector3(x - 1, position.y, 0));
+                    }
                 }
             }
 
-            return position;
+            return (false, position);
         }
     }
 }
