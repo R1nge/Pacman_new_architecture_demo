@@ -12,7 +12,7 @@ namespace _Assets.Scripts.Services
 
         public GameObject Create(Vector3 position)
         {
-            return _objectResolver.Instantiate(_configProvider.Wall, position, Quaternion.identity);
+            return _objectResolver.Instantiate(_configProvider.GameConfig.Wall, position, Quaternion.identity);
         }
     }
 }

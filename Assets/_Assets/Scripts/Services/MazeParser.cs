@@ -14,7 +14,7 @@ namespace _Assets.Scripts.Services
         public CellModel[,] Parse()
         {
             //TODO: replace magic number
-            var cells = new CellModel[_configProvider.Width, _configProvider.Height];
+            var cells = new CellModel[_configProvider.GameConfig.Width, _configProvider.GameConfig.Height];
             for (int y = 0; y < cells.GetLength(1); y++)
             {
                 for (int x = 0; x < cells.GetLength(0); x++)

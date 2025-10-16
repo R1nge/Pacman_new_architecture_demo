@@ -14,7 +14,7 @@ namespace _Assets.Scripts.Services
 
         public GameObject Create(Vector3 position)
         {
-            var ball = _objectResolver.Instantiate(_configProvider.Point, position, Quaternion.identity);
+            var ball = _objectResolver.Instantiate(_configProvider.GameConfig.Point, position, Quaternion.identity);
             _balls[(int)position.x, (int)position.y] = ball;
             return ball;
         }
