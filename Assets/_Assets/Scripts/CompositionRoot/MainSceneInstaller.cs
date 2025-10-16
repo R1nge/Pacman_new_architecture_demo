@@ -14,6 +14,10 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<WindowFactory>(Lifetime.Singleton);
             builder.RegisterEntryPoint<WindowManager>().AsSelf();
 
+            builder.Register<MapService>(Lifetime.Singleton);
+            builder.Register<PacmanService>(Lifetime.Singleton);
+            builder.Register<ScoreService>(Lifetime.Singleton);
+
             builder.Register<WallSpawner>(Lifetime.Singleton);
             builder.Register<BallSpawner>(Lifetime.Singleton);
 
