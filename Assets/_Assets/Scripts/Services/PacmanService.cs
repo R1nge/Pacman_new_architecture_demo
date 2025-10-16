@@ -12,5 +12,15 @@ namespace _Assets.Scripts.Services
         {
             return _pacmanMoveModel.CurrentPosition.CurrentValue;
         }
+
+        public void SetPacmanPosition(Vector3 position)
+        {
+            _pacmanMoveModel.CurrentPosition.Value = position;
+        }
+
+        public void SetPacmanTargetPosition(Vector3 positon)
+        {
+            _pacmanMoveModel.TargetPosition.Value = positon;
+        }
     }
 }
