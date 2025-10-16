@@ -257,6 +257,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 188356526}
   - {fileID: 127031337}
+  injectableInstaller: {fileID: 127031339}
 --- !u!4 &1247406541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5878034337496339629, guid: 99e3250feff285132b04647788d412a5, type: 3}
