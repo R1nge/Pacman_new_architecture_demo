@@ -1,16 +1,20 @@
 using System;
 using System.Linq;
+using _Assets.Scripts.Configs;
 using _Assets.Scripts.Services.Models;
 using UnityEngine;
+using VContainer;
 
 namespace _Assets.Scripts.Services
 {
     public class MazeParser
     {
+        [Inject] private ConfigProvider _configProvider;
+        
         public CellModel[,] Parse()
         {
             //TODO: replace magic number
-            var cells = new CellModel[28, 27];
+            var cells = new CellModel[_configProvider.Width, _configProvider.Height];
             for (int y = 0; y < cells.GetLength(1); y++)
             {
                 for (int x = 0; x < cells.GetLength(0); x++)

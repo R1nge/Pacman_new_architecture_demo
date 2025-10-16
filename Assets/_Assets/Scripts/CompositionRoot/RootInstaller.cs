@@ -15,13 +15,13 @@ namespace _Assets.Scripts.CompositionRoot
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterComponent(configProvider);
+
             builder.Register<MazeParser>(Lifetime.Singleton);
-            //TODO: replace magic number
-            var map = new GridModel(28, 27);
-            builder.RegisterInstance<GridModel>(map);
+            builder.Register<GridModel>(Lifetime.Singleton);
             builder.Register<ScoreModel>(Lifetime.Singleton);
             builder.Register<PacmanMoveModel>(Lifetime.Singleton);
-            builder.RegisterComponent(configProvider);
+
             builder.Register<SceneSerivce>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }

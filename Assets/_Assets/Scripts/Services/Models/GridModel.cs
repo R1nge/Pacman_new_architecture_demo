@@ -10,15 +10,10 @@ namespace _Assets.Scripts.Services.Models
         public CellModel[,] _cells;
         public int _width, _height;
 
-        public GridModel(int width, int height)
-        {
-            _width = width;
-            _height = height;
-            _cells = new CellModel[width, height];
-        }
-
         public void InitializeMaze(CellModel[,] maze)
         {
+            _width = maze.GetLength(0);
+            _height = maze.GetLength(1);
             _cells = maze;
             DisplayMaze();
         }
@@ -46,7 +41,7 @@ namespace _Assets.Scripts.Services.Models
         {
             this.cellType = new(cellType);
         }
-        
+
         public enum CellType : byte
         {
             None = 0,
