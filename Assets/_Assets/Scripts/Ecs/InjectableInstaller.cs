@@ -1,4 +1,5 @@
 #if MORPEH
+using System.Collections;
 using _Assets.Scripts.Ecs.Movement.Systems;
 using Scellecs.Morpeh;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace _Assets.Scripts.Ecs
 
         private World world;
 
-        private void Start()
+        private IEnumerator Start()
         {
             world = World.Default;
 
@@ -33,6 +34,8 @@ namespace _Assets.Scripts.Ecs
             //var pacmanInputCleanupSystem = new PacmanInputCleanupSystem();
             //_container.Inject(pacmanInputCleanupSystem);
             //updateGroup.AddSystem(pacmanInputCleanupSystem);
+
+            yield return new WaitForSeconds(5);
 
             world.AddSystemsGroup(order: 0, updateGroup);
         }

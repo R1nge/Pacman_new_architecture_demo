@@ -11,13 +11,15 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly WallSpawner _wallSpawner;
         private readonly GridModel _map;
         private readonly BallSpawner _ballSpawner;
+        private readonly MazeParser _mazeParser;
 
-        private MainMenuStatesFactory(WindowManager windowManager, WallSpawner wallSpawner, GridModel map, BallSpawner ballSpawner)
+        private MainMenuStatesFactory(WindowManager windowManager, WallSpawner wallSpawner, GridModel map, BallSpawner ballSpawner, MazeParser mazeParser)
         {
             _windowManager = windowManager;
             _wallSpawner = wallSpawner;
             _map = map;
-            this._ballSpawner = ballSpawner;
+            _ballSpawner = ballSpawner;
+            _mazeParser = mazeParser;
         }
 
         public IAsyncState CreateAsyncState(GameStateType gameStateType, GameStateMachine gameStateMachine)
@@ -27,7 +29,7 @@ namespace _Assets.Scripts.Services.StateMachine
                 case GameStateType.Init:
                     return new InitState(gameStateMachine, _windowManager);
                 case GameStateType.Game:
-                    return new GameState(gameStateMachine, _wallSpawner, _map, _windowManager, _ballSpawner);
+                    return new GameState(gameStateMachine, _wallSpawner, _map, _windowManager, _ballSpawner, _mazeParser);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameStateType), gameStateType, null);
             }

@@ -1,4 +1,5 @@
 using _Assets.Scripts.Configs;
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Models;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs;
@@ -14,7 +15,9 @@ namespace _Assets.Scripts.CompositionRoot
 
         protected override void Configure(IContainerBuilder builder)
         {
-            var map = new GridModel(31, 28);
+            builder.Register<MazeParser>(Lifetime.Singleton);
+            //TODO: replace magic number
+            var map = new GridModel(28, 27);
             builder.RegisterInstance<GridModel>(map);
             builder.Register<ScoreModel>(Lifetime.Singleton);
             builder.Register<PacmanMoveModel>(Lifetime.Singleton);

@@ -15,50 +15,12 @@ namespace _Assets.Scripts.Services.Models
             _width = width;
             _height = height;
             _cells = new CellModel[width, height];
-            InitializeMaze();
         }
 
-        private void InitializeMaze()
+        public void InitializeMaze(CellModel[,] maze)
         {
-            for (int y = 0; y < _height; y++)
-            {
-                for (int x = 0; x < _width; x++)
-                {
-                    _cells[x, y] = new CellModel(CellModel.CellType.Point);
-                }
-
-            }
-            
-            for (int x = 0; x < _width; x++)
-            {
-                _cells[x, 0] = new CellModel(CellModel.CellType.Wall);
-                _cells[x, _height - 1] = new CellModel(CellModel.CellType.Wall);
-            }
-
-            for (int y = 0; y < _height; y++)
-            {
-                _cells[0, y] = new CellModel(CellModel.CellType.Wall);
-                _cells[_width - 1, y] = new CellModel(CellModel.CellType.Wall);
-            }
-
-            GenerateMazePaths();
+            _cells = maze;
             DisplayMaze();
-        }
-
-        private void GenerateMazePaths()
-        {
-            List<Tuple<int, int>> positions = new List<Tuple<int, int>>();
-
-            for (int y = 1; y < _height - 1; y++)
-            {
-                for (int x = 1; x < _width - 1; x++)
-                {
-                    if ((x % 2 == 0) && (y % 2 == 0))
-                        _cells[x, y] = new CellModel(CellModel.CellType.Wall); // Wall
-                    else
-                        _cells[x, y] = new CellModel(CellModel.CellType.Point); // Path
-                }
-            }
         }
 
         private void DisplayMaze()
@@ -78,7 +40,7 @@ namespace _Assets.Scripts.Services.Models
 
     public class CellModel
     {
-        public ReactiveProperty<CellType> cellType { get; private set; }
+        public ReactiveProperty<CellType> cellType { get; private set; } = new ReactiveProperty<CellType>();
 
         public CellModel(CellType cellType)
         {
