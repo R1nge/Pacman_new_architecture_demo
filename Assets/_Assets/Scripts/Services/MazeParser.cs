@@ -10,14 +10,13 @@ namespace _Assets.Scripts.Services
     public class MazeParser
     {
         [Inject] private ConfigProvider _configProvider;
-        
+
         public CellModel[,] Parse()
         {
-            //TODO: replace magic number
             var cells = new CellModel[_configProvider.GameConfig.Width, _configProvider.GameConfig.Height];
-            for (int y = 0; y < cells.GetLength(1); y++)
+            for (var y = 0; y < cells.GetLength(1); y++)
             {
-                for (int x = 0; x < cells.GetLength(0); x++)
+                for (var x = 0; x < cells.GetLength(0); x++)
                 {
                     cells[x, y] = new CellModel(CellModel.CellType.None);
                 }
@@ -26,7 +25,7 @@ namespace _Assets.Scripts.Services
             var textFile = Resources.Load<TextAsset>("maze");
             var text = textFile.text;
             Debug.Log($"Total length of maze text: {text.Length}");
-            int newlineCount = text.Count(c => c == '\n');
+            var newlineCount = text.Count(c => c == '\n');
             Debug.Log($"Total newline characters in maze text: {newlineCount}");
 
             // Clean the text
@@ -35,11 +34,11 @@ namespace _Assets.Scripts.Services
             Debug.Log($"Total length of maze text: {text.Length}");
 
 
-            for (int i = 0; i < text.Length; i++)
+            for (var i = 0; i < text.Length; i++)
             {
-                int x = i % cells.GetLength(0);
-                int y = i / cells.GetLength(0);
-                //TODO: figure out how it iterates over text
+                var x = i % cells.GetLength(0);
+                var y = i / cells.GetLength(0);
+
                 var character = text[i];
                 Debug.Log($"Maze x:{x} y:{y} char:{character}");
                 if (character == '#')

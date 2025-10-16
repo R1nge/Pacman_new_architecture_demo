@@ -48,9 +48,6 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     //if can move
                     if (_mapService.GetCellType((int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)) != CellModel.CellType.Wall)
                     {
-                        //TODO:
-                        //In the original pacman didn't change the position and just continued on.
-                        //So, need to move this check into input system
                         moveComponent.TargetPosition += inputComponent.Direction;
                         _pacmanService.SetPacmanTargetPosition(moveComponent.TargetPosition);
                     }

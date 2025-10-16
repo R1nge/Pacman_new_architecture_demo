@@ -13,6 +13,11 @@ namespace _Assets.Scripts.Services
             return _pacmanMoveModel.CurrentPosition.CurrentValue;
         }
 
+        public Vector3 GetPacmanTargetPosition()
+        {
+            return _pacmanMoveModel.TargetPosition.CurrentValue;
+        }
+
         public void SetPacmanPosition(Vector3 position)
         {
             _pacmanMoveModel.CurrentPosition.Value = position;
