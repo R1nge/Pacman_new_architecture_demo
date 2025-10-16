@@ -13,7 +13,7 @@ namespace _Assets.Scripts.Ecs
 
         private World world;
 
-        private IEnumerator Start()
+        public void Init()
         {
             world = World.Default;
 
@@ -34,8 +34,6 @@ namespace _Assets.Scripts.Ecs
             //var pacmanInputCleanupSystem = new PacmanInputCleanupSystem();
             //_container.Inject(pacmanInputCleanupSystem);
             //updateGroup.AddSystem(pacmanInputCleanupSystem);
-
-            yield return new WaitForSeconds(5);
 
             world.AddSystemsGroup(order: 0, updateGroup);
         }

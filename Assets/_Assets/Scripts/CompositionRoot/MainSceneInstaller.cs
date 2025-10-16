@@ -1,7 +1,9 @@
+using _Assets.Scripts.Ecs;
 using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.StateMachine.StatesCreators;
 using _Assets.Scripts.Services.UIs;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -9,8 +11,12 @@ namespace _Assets.Scripts.CompositionRoot
 {
     public class MainSceneInstaller : LifetimeScope
     {
+        [SerializeField] private InjectableInstaller injectableInstaller;
+
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterComponent(injectableInstaller);
+
             builder.Register<WindowFactory>(Lifetime.Singleton);
             builder.RegisterEntryPoint<WindowManager>().AsSelf();
 
