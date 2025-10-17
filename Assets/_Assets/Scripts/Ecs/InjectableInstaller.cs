@@ -35,9 +35,13 @@ namespace _Assets.Scripts.Ecs
             _container.Inject(warpSystem);
             updateGroup.AddSystem(warpSystem);
 
-            var movementSystem = new PacmanMovementSystem();
-            _container.Inject(movementSystem);
-            updateGroup.AddSystem(movementSystem);
+            var pacmanMovementSystem = new PacmanMovementSystem();
+            _container.Inject(pacmanMovementSystem);
+            updateGroup.AddSystem(pacmanMovementSystem);
+
+            var clydeMovementSystem = new ClydeMovementSystem();
+            _container.Inject(clydeMovementSystem);
+            updateGroup.AddSystem(clydeMovementSystem);
 
             //var pacmanInputCleanupSystem = new PacmanInputCleanupSystem();
             //_container.Inject(pacmanInputCleanupSystem);

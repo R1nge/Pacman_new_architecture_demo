@@ -17,7 +17,6 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class PacmanMovementSystem : ISystem
     {
-        [Inject] private ConfigProvider _configProvider;
         [Inject] private PacmanService _pacmanService;
         [Inject] private MazeService _mazeService;
         private Filter _filter;
