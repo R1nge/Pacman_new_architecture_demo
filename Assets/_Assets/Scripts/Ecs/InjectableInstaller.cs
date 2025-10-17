@@ -27,6 +27,10 @@ namespace _Assets.Scripts.Ecs
             _container.Inject(pacmanScoreSystem);
             updateGroup.AddSystem(pacmanScoreSystem);
 
+            var winSystem = new BallRemoveSystem();
+            _container.Inject(winSystem);
+            updateGroup.AddSystem(winSystem);
+
             var warpSystem = new WarpSystem();
             _container.Inject(warpSystem);
             updateGroup.AddSystem(warpSystem);

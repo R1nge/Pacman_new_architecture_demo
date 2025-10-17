@@ -63,6 +63,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTaskVoid Update()
         {
+            //TODO: move into ECS
+            if (!_ballSpawner.HasBall())
+            {
+                Debug.Log("Win");
+            }
         }
 
         public async UniTaskVoid FixedUpdate()

@@ -5,13 +5,11 @@ using VContainer;
 
 namespace _Assets.Scripts.Ecs.Movement.Systems
 {
-    public class PacmanFieldScoreSystem : ISystem
+    public class BallRemoveSystem : ISystem
     {
-        [Inject] private MazeService mazeService;
-        [Inject] private PacmanService _pacmanService;
-        [Inject] private ScoreService _scoreService;
+        [Inject] private MazeService _mazeService;
         [Inject] private BallSpawner _ballSpawner;
-        [Inject] private SoundService _soundService;
+        [Inject] private PacmanService _pacmanService;
         public World World { get; set; }
 
         public void OnAwake()
@@ -22,10 +20,10 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
         {
             var positionX = (int)_pacmanService.GetPacmanPosition().x;
             var positionY = (int)_pacmanService.GetPacmanPosition().y;
-            if (mazeService.GetCellType(positionX, positionY) == CellModel.CellType.Point)
+            if (_mazeService.GetCellType(positionX, positionY) == CellModel.CellType.Point)
             {
-                _scoreService.Add(1);
-                _soundService.Play(SoundService.SoundType.PacmanEating);
+                _mazeService.SetCellType(positionX, positionY, CellModel.CellType.None);
+                _ballSpawner.RemoveAt(_pacmanService.GetPacmanPosition());
             }
         }
 
