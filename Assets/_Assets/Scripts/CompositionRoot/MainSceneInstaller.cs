@@ -12,9 +12,11 @@ namespace _Assets.Scripts.CompositionRoot
     public class MainSceneInstaller : LifetimeScope
     {
         [SerializeField] private InjectableInstaller injectableInstaller;
+        [SerializeField] private SoundService soundService;
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterComponent(soundService);
             builder.RegisterComponent(injectableInstaller);
 
             builder.Register<WindowFactory>(Lifetime.Singleton);

@@ -19,7 +19,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
     {
         [Inject] private ConfigProvider _configProvider;
         [Inject] private PacmanService _pacmanService;
-        [Inject] private MazeService mazeService;
+        [Inject] private MazeService _mazeService;
         private Filter _filter;
         private Stash<MovementComponent> _movementStash;
         private Stash<InputComponent> _inputStash;
@@ -46,7 +46,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     moveComponent.CurrentPosition = moveComponent.TargetPosition;
                     _pacmanService.SetPacmanPosition(moveComponent.CurrentPosition);
                     //if can move
-                    if (mazeService.GetCellType((int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)) != CellModel.CellType.Wall)
+                    if (_mazeService.GetCellType((int)(moveComponent.TargetPosition.x + inputComponent.Direction.x), (int)(moveComponent.TargetPosition.y + inputComponent.Direction.y)) != CellModel.CellType.Wall)
                     {
                         moveComponent.TargetPosition += inputComponent.Direction;
                         _pacmanService.SetPacmanTargetPosition(moveComponent.TargetPosition);

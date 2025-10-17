@@ -16,10 +16,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly MazeParser _mazeParser;
         private readonly InjectableInstaller _injectableInstaller;
         private readonly WarpPortalSpawner _warpPortalSpawner;
+        private readonly SoundService _soundService;
 
         public GameState(GameStateMachine stateMachine, WallSpawner wallSpawner, GridModel map,
             WindowManager windowManager, BallSpawner ballSpawner, MazeParser mazeParser,
-            InjectableInstaller injectableInstaller, WarpPortalSpawner warpPortalSpawner)
+            InjectableInstaller injectableInstaller, WarpPortalSpawner warpPortalSpawner, SoundService soundService)
         {
             _stateMachine = stateMachine;
             _wallSpawner = wallSpawner;
@@ -29,6 +30,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _mazeParser = mazeParser;
             _injectableInstaller = injectableInstaller;
             _warpPortalSpawner = warpPortalSpawner;
+            _soundService = soundService;
         }
 
         public async UniTask Enter()
@@ -56,6 +58,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
                     }
                 }
             }
+            _soundService.PlayMusic();
         }
 
         public async UniTaskVoid Update()

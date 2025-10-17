@@ -11,6 +11,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
         [Inject] private PacmanService _pacmanService;
         [Inject] private ScoreService _scoreService;
         [Inject] private BallSpawner _ballSpawner;
+        [Inject] private SoundService _soundService;
         public World World { get; set; }
 
         public void OnAwake()
@@ -25,6 +26,7 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
             {
                 mazeService.SetCellType(positionX, positionY, CellModel.CellType.None);
                 _scoreService.Add(1);
+                _soundService.Play(SoundService.SoundType.PacmanEating);
                 _ballSpawner.RemoveAt(_pacmanService.GetPacmanPosition());
             }
         }
