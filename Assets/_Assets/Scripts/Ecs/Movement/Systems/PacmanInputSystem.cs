@@ -19,13 +19,15 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
         [Inject] private PacmanService _pacmanService;
         private Filter _filter;
         private Stash<InputComponent> _inputStash;
+        private Stash<MovementComponent> _moveStash;
         private Vector3 _tempDirection;
         public World World { get; set; }
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<PacManTag>().With<InputComponent>().Build();
+            _filter = World.Filter.With<PacManTag>().With<InputComponent>().With<MovementComponent>().Build();
             _inputStash = World.GetStash<InputComponent>();
+            _moveStash = World.GetStash<MovementComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -51,10 +53,18 @@ namespace _Assets.Scripts.Ecs.Movement.Systems
                     _tempDirection = Vector3.right;
                 }
 
-                if (mazeService.GetCellType((int)(_pacmanService.GetPacmanPosition().x + _tempDirection.x), (int)(_pacmanService.GetPacmanPosition().y + _tempDirection.y)) != CellModel.CellType.Wall || 
-                    mazeService.GetCellType((int)(_pacmanService.GetPacmanTargetPosition().x + _tempDirection.x), (int)(_pacmanService.GetPacmanTargetPosition().y + _tempDirection.y)) != CellModel.CellType.Wall)
+                if (mazeService.GetCellType((int)(_pacmanService.GetPacmanPosition().x + _tempDirection.x),
+                        (int)(_pacmanService.GetPacmanPosition().y + _tempDirection.y)) != CellModel.CellType.Wall ||
+                    mazeService.GetCellType((int)(_pacmanService.GetPacmanTargetPosition().x + _tempDirection.x),
+                        (int)(_pacmanService.GetPacmanTargetPosition().y + _tempDirection.y)) !=
+                    CellModel.CellType.Wall)
                 {
-                    inputComponent.Direction = _tempDirection;
+                    ref var movementComponent = ref _moveStash.Get(entity);
+                    if (movementComponent.CurrentLerpDuration >= movementComponent.LerpDuration * 0.9)
+                    {
+                        inputComponent.Direction = _tempDirection;
+                        Debug.Log($"Input change direction; Current lerp {movementComponent.CurrentLerpDuration}; Lerp {movementComponent.LerpDuration}");
+                    }
                 }
                 else
                 {
