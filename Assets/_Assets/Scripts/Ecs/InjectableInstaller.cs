@@ -34,6 +34,7 @@ namespace _Assets.Scripts.Ecs
             var warpSystem = new WarpSystem();
             _container.Inject(warpSystem);
             updateGroup.AddSystem(warpSystem);
+            //TODO: create a general movement system that's controlled by the input
 
             var pacmanMovementSystem = new PacmanMovementSystem();
             _container.Inject(pacmanMovementSystem);
@@ -43,9 +44,9 @@ namespace _Assets.Scripts.Ecs
             _container.Inject(clydeMovementSystem);
             updateGroup.AddSystem(clydeMovementSystem);
 
-            //var pacmanInputCleanupSystem = new PacmanInputCleanupSystem();
-            //_container.Inject(pacmanInputCleanupSystem);
-            //updateGroup.AddSystem(pacmanInputCleanupSystem);
+            var pacmanKillSystem = new PacmanKillSystem();
+            _container.Inject(pacmanKillSystem);
+            updateGroup.AddSystem(pacmanKillSystem);
 
             world.AddSystemsGroup(order: 0, updateGroup);
         }
